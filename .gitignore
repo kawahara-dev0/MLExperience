@@ -1,0 +1,6 @@
+# common
+*.env
+
+# backend
+__pycache__/
+lightning_logs/
