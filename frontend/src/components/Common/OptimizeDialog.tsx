@@ -1,8 +1,4 @@
-/*****************************************************************************
- * 機能：最適化確認ダイアログ
- * 概要：最適化の実行を確認するダイアログ。
- *****************************************************************************/
-import * as React from "react";
+/** Confirmation dialog before running optimization. */
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -15,7 +11,6 @@ export default function OptimizeDialog(props: {
   SetOptimizeDialog: (value: boolean) => void;
   FetchButtonClick: () => void;
 }) {
-  /* ダイアログクローズハンドラ */
   const HandleClose = () => {
     props.SetOptimizeDialog(false);
   };
@@ -28,17 +23,19 @@ export default function OptimizeDialog(props: {
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">
-        モデルの最適な設定を検索します
+        Search for optimal model settings
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          10～30分ほどかかります。完了後、自動で画面に反映されます。
+          This may take 10–30 minutes. Results will be applied to the screen when done.
+        </DialogContentText>
+        <DialogContentText sx={{ mt: 2, color: "warning.main" }}>
+          Do not close the browser while processing.
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        {/* OKボタンクリックで最適化フェッチ処理を実行 */}
-        <Button onClick={props.FetchButtonClick}>OK</Button>
-        <Button onClick={HandleClose} autoFocus>キャンセル</Button>
+        <Button onClick={props.FetchButtonClick} variant="contained">Run</Button>
+        <Button onClick={HandleClose} autoFocus>Cancel</Button>
       </DialogActions>
     </Dialog>
   );

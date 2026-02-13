@@ -1,39 +1,29 @@
-/*****************************************************************************
- * 機能：機械学習簡易体験システム スタイルシート
- * 概要：システム全体のCSSクラスを定義する。
- *****************************************************************************/
+/** Global styles for ML Experience. */
 html {
-    scroll-behavior: smooth;    /* スクロール動作 */
+    scroll-behavior: smooth;
 }
-/* スクロールバー */
 *::-webkit-scrollbar {
     width: 8px;
     height: 8px;
 }
-/* スクロールバー背景 */
 *::-webkit-scrollbar-track {
     background: #181818;
 }
-/* スクロールバー角 */
 *::-webkit-scrollbar-corner {
     background-color: #181818;
 }
-/* スクロールバー本体 */
 *::-webkit-scrollbar-thumb {
     background: #555;
 }
-/* スクロールバー本体 ホバー時 */
 *::-webkit-scrollbar-thumb:hover {
     background: #888;
 }
-/* Firefox スクロールバー設定 */
 * {
     scrollbar-width: thin;
     scrollbar-color: #555 #181818;
 }
 
-/* サイドメニュー */
-.body .sidebar {
+.sidebar {
     position: fixed;
     width: 200px;
     height: 100%;
@@ -42,8 +32,7 @@ html {
     border-right: 1px solid #555;
     z-index: 2;
 }
-/* メインコンテンツ */
-.body .main-cont {
+.main-cont {
     flex-grow: 1;
     margin-left: 250px;
     padding: 30px 50px;
@@ -53,36 +42,30 @@ html {
     overflow-x: hidden;
 }
 
-/* フレーム */
 .frame {
     background-color: #252525;
     border-radius: 5px;
     padding: 30px;
 }
-/* 区切り線 */
 .separator-line {
     background-color: #555;
     height: 2px;
     margin: 40px -30px;
 }
 
-/* 下線付きテキスト */
 .text-def {
     white-space: nowrap !important;
 }
-/* 下線付きテキスト */
 .text-UL {
     text-decoration: underline;
     white-space: nowrap !important;
 }
-/* ハイパーパラメータ テキスト */
 .text-hParam {
     text-decoration: underline;
     text-align: center;
     white-space: nowrap !important;
 }
 
-/* リンク */
 .a-inherit {
     color: inherit;
     text-decoration: none;
@@ -93,7 +76,6 @@ html {
     text-decoration: none;
 }
 
-/* マージン */
 .margin-section {
     margin-top: 60px;
 }
@@ -108,19 +90,16 @@ html {
     margin-left: 10px;
 }
 
-/* データグリッド */
 .datagrid {
     height: 400px;
 }
 
-/* グリッド デフォルト */
 .grid-def {
     display: grid;
     grid-auto-flow: column;
     justify-content: start;
     align-items: center;
 }
-/* グリッド ニューラルネットワーク設定 */
 .grid-setNn {
     display: grid;
     grid-template-columns: repeat(4, auto);
@@ -144,7 +123,6 @@ html {
     padding: 0px 25px;
     height: 150px;
 }
-/* グリッド ハイパーパラメータ */
 .grid-hParam {
     display: grid;
     grid-template-columns: repeat(4, auto);
@@ -154,12 +132,10 @@ html {
     align-items: center;
     width: 100%;
 }
-/* グリッド 指標 */
 .grid-metrics {
     display: grid;
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns:     repeat(4, auto);
 }
-/* グリッド ターゲット予測値／正解値 */
 .grid-tValues {
     display: grid;
     grid-auto-flow: column;

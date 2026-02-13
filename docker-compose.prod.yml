@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  # PostgreSQLデータベース
+  db:
+    image: postgres:16-alpine
+    container_name: mlexperience-db-prod
+    environment:
+      POSTGRES_DB: ${DB_NAME:-mydatabase}
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  # バックエンド（FastAPI）
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: mlexperience-backend-prod
+    environment:
+      CLIENT_URL: ${CLIENT_URL:-http://localhost}
+      DB_HOST: db
+      DB_NAME: ${DB_NAME:-mydatabase}
+      DB_USERNAME: ${DB_USERNAME:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-password}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+    # 本番環境では --reload を外す
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000"]
+
+  # フロントエンド（nginx）
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: production
+    container_name: mlexperience-frontend-prod
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: always
+
+volumes:
+  postgres_data_prod:
+    driver: local
