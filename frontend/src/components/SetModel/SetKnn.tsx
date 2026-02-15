@@ -1,5 +1,4 @@
 /** k-Nearest neighbors model configuration. */
-import React from "react";
 import Tooltip from "@mui/material/Tooltip";
 import { CommonSInput, CommonTButton, CONFIG_KEY } from "../index";
 

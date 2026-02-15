@@ -38,9 +38,9 @@ export default function CommonTButton(props: {
           tooltipTitle: "Model inspired by neurons; can handle regression and classification. Layers and activation functions are applied in sequence. Multiple layers are often called deep learning. This system supports up to 5 layers." },
         { value: MODEL.rf, display: "Random forest",
           tooltipTitle: "Model using decision trees to classify data. Handles regression and classification. Combines many trees to improve accuracy." },
-        { value: MODEL.svm, display: "Support vector machine<br/>(SVM)",
+        { value: MODEL.svm, display: "SVM<br/>(Support vector machine)",
           tooltipTitle: "Finds boundaries to separate classes; strong at classification. Relatively robust to outliers and noise." },
-        { value: MODEL.knn, display: "k-Nearest neighbors<br/>(k-NN)",
+        { value: MODEL.knn, display: "k-NN<br/>(k-Nearest neighbors)",
           tooltipTitle: "Classifies by similarity (nearby points). Good for classification, simple problems, and small datasets." },
       ],
       selectValue: model,
@@ -72,7 +72,7 @@ export default function CommonTButton(props: {
     },
     optimizer: {
       tButtonValues: [
-        { value: OPTIMIZER.sgd, display: "SGD<br/>(Stochastic gradient descent)",
+        { value: OPTIMIZER.sgd, display: "SGD",
           tooltipTitle: "Basic method: update parameters using gradient from randomly sampled data." },
         { value: OPTIMIZER.momentum, display: "Momentum",
           tooltipTitle: "SGD with inertia; often converges faster." },

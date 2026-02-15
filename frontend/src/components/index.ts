@@ -23,7 +23,7 @@ import {
   SIV_gamma,
   SIV_nNeighbors,
 } from "../types";
-import type { NnDetail, NnHparam, RfHparam, SvmHparam, KnnHparam } from "../types";
+import type { NnDetail, NnHparam, RfHparam, SvmHparam, KnnHparam, CommonContextType, ModelContextType } from "../types";
 
 export { default as CommonCheckBox } from "./Common/CommonCheckBox";
 export { default as CommonSInput } from "./Common/CommonSInput";
@@ -46,7 +46,7 @@ export { default as LostLineChart } from "./ExecTraining/LostLineChart";
 
 export * from "../types";
 
-export const CommonContext = createContext({
+export const CommonContext = createContext<CommonContextType>({
   selectData: INPUT_DATA.titanic,
   SetSelectData: (_value: INPUT_DATA) => {},
   target: "",
@@ -59,7 +59,7 @@ export const CommonContext = createContext({
   SetFetchError: (_value: string) => {},
 });
 
-export const ModelContext = createContext({
+export const ModelContext = createContext<ModelContextType>({
   model: MODEL.nn,
   SetModelVal: (_value: MODEL) => {},
   nnDetails: [

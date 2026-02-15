@@ -1,5 +1,4 @@
 /** Random forest model configuration. */
-import React from "react";
 import Tooltip from "@mui/material/Tooltip";
 import { CommonSInput, CommonTButton, CommonCheckBox, CONFIG_KEY } from "../index";
 

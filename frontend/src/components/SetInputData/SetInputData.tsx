@@ -1,5 +1,5 @@
 /** Input data setup: select data and target, run preprocessing. */
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import Tooltip from "@mui/material/Tooltip";
 import CircularProgress from "@mui/material/CircularProgress";
 import { GridColDef } from "@mui/x-data-grid";
@@ -231,63 +231,65 @@ export default function SetInputData(props: {
         )}
       </div>
 
-      {(inputData.length > 0) && (<>
-        <div className="margin-cont"><DataTable gridCol={inputGridCol} data={inputData} /></div>
+      {(inputData.length > 0) && (
+        <div style={{ minHeight: 1200 }}>
+          <div className="margin-cont"><DataTable gridCol={inputGridCol} data={inputData} /></div>
 
-        <div id="Preproc" className="separator-line" />
+          <div id="Preproc" className="separator-line" />
 
-        <div className="grid-def">
-          <div className="text-def">Select&nbsp;</div>
-          <Tooltip title={tooltipTarget} placement="bottom-start">
-            <div className="text-UL">target</div>
-          </Tooltip>
-          <div className="text-def">&nbsp;column, then run&nbsp;</div>
-          <Tooltip title={tooltipPreproc} placement="bottom-start">
-            <div className="text-UL">preprocessing</div>
-          </Tooltip>
-          <div className="text-def">.</div>
-        </div>
-
-        <div className="grid-def margin-cont" style={{ columnGap: 30 }}>
-          <SelectTarget inputGridCol={inputGridCol} preTarget={preTarget} SetPreTarget={SetPreTarget} />
-          <FetchButton req={FETCH_REQ.Preproc} fetchPreproc={{ preTarget, SetPreprocCols, SetPreprocData: props.SetPreprocData, SetPreprocCont }} />
-          {(waitFetch === FETCH_REQ.Preproc) && (<CircularProgress />)}
-          {(fetchError === FETCH_REQ.Preproc) && (
-            <div className="text-def" style={{ color: "red" }}>Server communication error. Please try again later.</div>
-          )}
-        </div>
-
-        { props.preprocData.length > 0 && (<>
-          <div className="text-def margin-cont">
-            Term descriptions:
-          </div>
-          <div className="grid-def" style={{ columnGap: 20 }}>
-            <Tooltip title={tooltipNan} placement="bottom-start">
-              <div className="text-UL">Missing values</div>
+          <div className="grid-def">
+            <div className="text-def">Select&nbsp;</div>
+            <Tooltip title={tooltipTarget} placement="bottom-start">
+              <div className="text-UL">target</div>
             </Tooltip>
-            <Tooltip title={tooltipBin} placement="bottom-start">
-              <div className="text-UL">Binning</div>
+            <div className="text-def">&nbsp;column, then run&nbsp;</div>
+            <Tooltip title={tooltipPreproc} placement="bottom-start">
+              <div className="text-UL">preprocessing</div>
             </Tooltip>
-            <Tooltip title={tooltipIndex} placement="bottom-start">
-              <div className="text-UL">Index encoding</div>
-            </Tooltip>
-            <Tooltip title={tooltipOneHot} placement="bottom-start">
-              <div className="text-UL">One-hot encoding</div>
-            </Tooltip>
+            <div className="text-def">.</div>
           </div>
 
-          <div className="text-def margin-cont">
-            Preprocessing result
-            <div style={{ height: 120, maxWidth: 800, overflowY: "scroll", whiteSpace: "pre-wrap" }}>
-              { preprocCont.map((item, index) => (
-                <div key={index}>{item}</div>
-              ))}
+          <div className="grid-def margin-cont" style={{ columnGap: 30 }}>
+            <SelectTarget inputGridCol={inputGridCol} preTarget={preTarget} SetPreTarget={SetPreTarget} />
+            <FetchButton req={FETCH_REQ.Preproc} fetchPreproc={{ preTarget, SetPreprocCols, SetPreprocData: props.SetPreprocData, SetPreprocCont }} />
+            {(waitFetch === FETCH_REQ.Preproc) && (<CircularProgress />)}
+            {(fetchError === FETCH_REQ.Preproc) && (
+              <div className="text-def" style={{ color: "red" }}>Server communication error. Please try again later.</div>
+            )}
+          </div>
+
+          { props.preprocData.length > 0 && (<>
+            <div className="text-def margin-cont">
+              Term descriptions:
             </div>
-          </div>
+            <div className="grid-def" style={{ columnGap: 20 }}>
+              <Tooltip title={tooltipNan} placement="bottom-start">
+                <div className="text-UL">Missing values</div>
+              </Tooltip>
+              <Tooltip title={tooltipBin} placement="bottom-start">
+                <div className="text-UL">Binning</div>
+              </Tooltip>
+              <Tooltip title={tooltipIndex} placement="bottom-start">
+                <div className="text-UL">Index encoding</div>
+              </Tooltip>
+              <Tooltip title={tooltipOneHot} placement="bottom-start">
+                <div className="text-UL">One-hot encoding</div>
+              </Tooltip>
+            </div>
 
-          <div className="margin-cont"><DataTable gridCol={preprocGridCol} data={props.preprocData} /></div>
-        </>)}
-      </>)}
+            <div className="text-def margin-cont">
+              Preprocessing result
+              <div style={{ height: 120, maxWidth: 800, overflowY: "scroll", whiteSpace: "pre-wrap" }}>
+                { preprocCont.map((item, index) => (
+                  <div key={index}>{item}</div>
+                ))}
+              </div>
+            </div>
+
+            <div className="margin-cont"><DataTable gridCol={preprocGridCol} data={props.preprocData} /></div>
+          </>)}
+        </div>
+      )}
     </div>
   </>);
 }

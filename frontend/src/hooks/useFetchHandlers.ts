@@ -10,7 +10,7 @@ import type {
   SvmHparam,
   KnnHparam,
 } from "../types/models";
-import { MODEL, LAYER, AF, MAX_FEATURES } from "../types/enums";
+import { LAYER, AF, MAX_FEATURES } from "../types/enums";
 
 export function useFetchHandlers() {
   const { SetProblem } = useContext(CommonContext);
@@ -30,7 +30,6 @@ export function useFetchHandlers() {
     SetKnnHparam,
   } = useContext(ModelContext);
 
-  // Import response handling
   const handleImportResponse = useCallback((resData: { arg: (string | number)[][] }, props?: FetchImportProps) => {
     props?.SetInputDataVal(resData.arg);
   }, []);
@@ -44,10 +43,13 @@ export function useFetchHandlers() {
     props?.SetPreprocCont(resData.arg[2]);
     SetProblem(resData.arg[3]);
 
-    const element = document.querySelector("#Preproc");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    const scrollToPreproc = () => {
+      const element = document.querySelector("#Preproc");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    };
+    setTimeout(scrollToPreproc, 200);
   }, []);
 
   const handleOptimizeResponse = useCallback((resData: { arg: Record<string, unknown> }) => {
@@ -125,6 +127,14 @@ export function useFetchHandlers() {
       props?.SetTestMetrics(testMetrics);
       props?.SetTargetValues({ yPred: targetValues[0], yTest: targetValues[1] });
     }
+    
+    const scrollToTraining = () => {
+      const element = document.querySelector("#ExecTraining");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    };
+    setTimeout(scrollToTraining, 200);
   }, [model]);
 
   const getTrainingArgs = (): (string | number | boolean)[] => {
